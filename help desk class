@@ -1,0 +1,48 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class HelpDesk {
+    private List<Ticket> tickets;
+
+    // Constructor
+    public HelpDesk() {
+        tickets = new ArrayList<>();
+    }
+
+    // Method to create a new ticket
+    public void createTicket(String description, String createdBy) {
+        Ticket newTicket = new Ticket(description, createdBy);
+        tickets.add(newTicket);
+        System.out.println("Ticket created successfully. Ticket ID: " + newTicket.getId());
+    }
+
+    // Method to view all tickets
+    public void viewTickets() {
+        if (tickets.isEmpty()) {
+            System.out.println("No tickets available.");
+        } else {
+            for (Ticket ticket : tickets) {
+                System.out.println(ticket);
+                System.out.println("----------------------------");
+            }
+        }
+    }
+
+    // Method to update the status of a ticket
+    public void updateTicketStatus(String ticketId, String newStatus) {
+        for (Ticket ticket : tickets) {
+            if (ticket.getId().equals(ticketId)) {
+                ticket.setStatus(newStatus);
+                System.out.println("Ticket updated successfully.");
+                return;
+            }
+        }
+        System.out.println("Ticket with ID " + ticketId + " not found.");
+    }
+
+    // Method to resolve a ticket
+    public void resolveTicket(String ticketId) {
+        updateTicketStatus(ticketId, "Resolved");
+    }
+}
