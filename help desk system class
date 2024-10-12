@@ -1,0 +1,50 @@
+public class HelpDeskSystem {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        HelpDesk helpDesk = new HelpDesk();
+
+        int choice;
+
+        do {
+            System.out.println("\nHelp Desk Management System");
+            System.out.println("1. Create a ticket");
+            System.out.println("2. View all tickets");
+            System.out.println("3. Update ticket status");
+            System.out.println("4. Resolve a ticket");
+            System.out.println("5. Exit");
+            System.out.print("Enter your choice: ");
+            choice = scanner.nextInt();
+            scanner.nextLine(); // Consume the newline character
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter issue description: ");
+                    String description = scanner.nextLine();
+                    System.out.print("Enter your name: ");
+                    String createdBy = scanner.nextLine();
+                    helpDesk.createTicket(description, createdBy);
+                    break;
+                case 2:
+                    helpDesk.viewTickets();
+                    break;
+                case 3:
+                    System.out.print("Enter Ticket ID to update: ");
+                    String ticketId = scanner.nextLine();
+                    System.out.print("Enter new status (Open/In Progress/Resolved): ");
+                    String status = scanner.nextLine();
+                    helpDesk.updateTicketStatus(ticketId, status);
+                    break;
+                case 4:
+                    System.out.print("Enter Ticket ID to resolve: ");
+                    String resolveTicketId = scanner.nextLine();
+                    helpDesk.resolveTicket(resolveTicketId);
+                    break;
+                case 5:
+                    System.out.println("Exiting Help Desk System.");
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+            }
+        } while (choice != 5);
+    }
+}
